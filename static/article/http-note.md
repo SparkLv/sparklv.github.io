@@ -31,7 +31,7 @@
 
 3. 没有基础URL，可能只是一个不完整或损坏了的URL  
 
-![http-url](img/http-url.png)  
+![http-url](static/img/http-url.png)  
 
 ##HTTP报文
 ###报文流
@@ -61,7 +61,7 @@ HTTP报文都可以分为两类：请求报文和响应报文
 
 * method  
   客户端希望服务器对资源执行的动作
-  ![http-method](img/http-method.png)
+  ![http-method](static/img/http-method.png)
   Head：可以用来在不获取资源的情况下了解资源的情况，如判断类型，查看状态码以确定资源是否存在，查看首部测试资源是否被修改  
   PUT：方法的语义就是让服务器用请求的主体部分来创建一个由所请求的URL命名的新文档，若已存在则替代  
   OPTIONS：为请求web服务器告知其支持的各种功能，支持的方法  
@@ -72,8 +72,8 @@ HTTP报文都可以分为两类：请求报文和响应报文
   报文所以使用的HTTP版本。如HTTP/\<major\>.\<minor\>
 * status-code
   三位数字描述请求过程中所发生的情况
-  ![htto-status](img/http-status.png)
-  ![htto-status(1)](img/http-status(1).png)
+  ![htto-status](static/img/http-status.png)
+  ![htto-status(1)](static/img/http-status(1).png)
 * reason-phrase
   status-code的可读版本
 * header 
@@ -85,8 +85,8 @@ HTTP报文都可以分为两类：请求报文和响应报文
 分为 通用首部 请求首部 响应首部 实体首部 扩展首部  
 每个HTTP首部都有一种简单的语法：名字后面跟着冒号：，然后跟上可选的空格再跟上字段值，最后一个是CRLF  
 将首部行分为多行需要在多出来的每行前面加上至少一个空格和或者制表符  
-![accept](img/accept_header.png)
-![body](img/body_header.png) 
+![accept](static/img/accept_header.png)
+![body](static/img/body_header.png) 
 ####实体的主体部分  
 是可选的，实体的主体是HTTP报文的负荷。就是HTTP要传输的内容  
 ####方法  
@@ -98,12 +98,12 @@ HTTP报文都可以分为两类：请求报文和响应报文
 * DELETE 就是请求服务器删除请求URL所指定的资源。（HTTP规范允许服务器在不通知客户端的情况下撤销请求）
 * TRACE允许客户端在最终将请求发给服务器时，看看其变成什么样子，在请求行程的最后一站，服务器会弹出一条TRACE响应，并在响应主体中携带它收到的原始请求报文。这样客户端就可以查看在所有中间HTTP应用程序组成的请求/响应链上，原始报文是否以及如何被毁坏或修改过  
 ####状态码  
-![100](img/100.png)
-![200](img/200.png)
-![300](img/300.png)
-![300(1)](img/300(1).png)
-![400](img/400.png)
-![400(1)](img/400(1).png)
-![500](img/500.png)
+![100](static/img/100.png)
+![200](static/img/200.png)
+![300](static/img/300.png)
+![300(1)](static/img/300(1).png)
+![400](static/img/400.png)
+![400(1)](static/img/400(1).png)
+![500](static/img/500.png)
 
 
