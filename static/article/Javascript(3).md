@@ -80,4 +80,190 @@ setTimeout(fun,500);
 
 #### 系统对话框
 
+* alert():只接受一个字符串展现给用户
+* confirm():只接受一个字符串用于展现给用户，返回一个布尔值
+* prompt():接受两个字符串，一个是展示的字符串，二是输入文本域的默认值
+* print():打印对话框
+
+### location对象
+
+location是一个特别的对象，它既是window对象的属性，也是document对象的属性
+
+#### 属性
+
+* hash：hash值
+* host：服务器名和端口号
+* hostname：服务器名
+* href：完整URL
+* pathname：目录或文件名
+* port：端口号
+* protocol：协议
+* search：查询字符串
+
+#### 位置操作
+
+* assign()方法：改变浏览器位置，同样直接改变属性值亦可
+* replace()方法：不会在浏览器历史记录中生成新的记录，因此无法后退返回
+* reload()方法：重新加载当前显示的页面，如果不传递任何参数，并且页面没有改变，那么将从缓存中重新加载。如果传递一个true。那么，会从服务器中加载。
+
+### navigator
+
+用于检测显示网页的浏览器类型
+
+在ie中检测插件使用new ActiveXObject('name')
+
+其他浏览器可以使用navigator.plugins(返回一个数组，数组的对象有name等属性)
+
+### history
+
+这个对象保存着用户上网的历史记录。
+
+方法：
+
+* history.go(前进或退后页数的数字)
+* history.back():退后一页
+* history.forward():前进一页
+
+## DOM1
+
+### 节点层次
+
+可以将任何HTML,XML文档描绘成一个由多层节点构成的结构。
+
+文档节点是每个文档的根节点，文档节点只有一个根节点,即`<html>`元素，也称为文档元素，任何文档只能有一个文档元素（包括XML）
+
+JS中所有节点类型都继承自Node类型，因此所有节点都共享着相同的基本属性和方法。
+
+#### 类型
+
+```javascript
+Node.ELEMENT_NODE(1)
+Node.ATTRIBUTE_NODE(2)
+Node.TEXT_NODE(3)
+Node.CDATA_SECTION_NODE(4)
+Node.ENTITY_REFERENCE_NODE(5)
+Node.ENTITY_NODE(6)
+Node.PROCESSING_INSTRUCTION_NODE(7)
+Node.COMMENT_NODE(8)
+Node.DOCUMENT_NODE(9)
+Node.DOCUMENT_TYPE_NODE(10)
+Node.DOCUMENT_FRAGMENT_NODE(11)
+Node.NOTATION_NODE(12)
+```
+
+可以使用nodeType属性获取类型，最好和数字比较，因为IE不兼容（没有公开node类型的构造函数）
+
+#### nodeName和nodeValue
+
+对于元素节点，nodeName为标签名，nodeValue是null
+
+#### 节点关系
+
+childNodes属性：保存着一个nodeList对象，是一个类数组对象，用于保存一组有序的节点。可以使用[]或item()访问
+
+parentNode属性：指向文档树的父节点
+
+previousSibling属性：前一个同辈节点，第一个节点为null
+
+nextSibling属性：下一个同辈节点，最后一个为null
+
+firstChild属性：指向第一个子节点，相当于childNodes[0]
+
+lastChild属性：指向最后一个子节点，相当于childNodes[childNodes.length - 1]
+
+hasChildNodeS()方法：在节点包含一个或着多个子节点的情况下返回true。
+
+ownerDocument属性：指向文档节点。
+
+#### 操作节点
+
+* appendChild()：用于向childNodes结尾添加一个节点
+* insertBefore()：接受两个参数，一是插入的节点，二是参照节点
+* replaceChild()：接受两个参数，一个是插入的节点，二是被替换节点。返回替换节点
+* removeChild()：接受一个参数，即被删除节点
+  * 注意，一个文档不能有多个相同的节点，appendChild已存在节点，会变成移动节点
+* cloneNode()：用于复制节点，如果参数是true会复制子节点
+* normalize()：用于处理文本节点（不含文本和相邻文本节点）
+
+#### Document类型
+
+JS通过Document类型表示文档，document对象是HTMLDocument得一个实例，表示整个HTML页面。而且document对象是window对象得一个属性，因此可以将其作为全局对象来访问
+
+* nodeType:9
+* nodeName:#document
+* nodeValue:null
+* parentNode:null
+* ownerDocument:null
+
+子节点可能是一个DocumentType（最多一个）、Element（最多一个）、ProcessingInstruction或Comment
+
+##### 文档子节点
+
+document属性
+
+* documentElment属性：代表文档元素
+* body属性：指向body元素
+* doctype属性：代表DocumentType类型，即`<!DOCTYPE>`（注意兼容性）
+
+##### 文档信息
+
+document属性
+
+* title属性：代表title元素之间的文本
+* URL属性：包含页面完整的URL链接
+* domain属性：包含页面的域名
+* referrer属性：保存着链接到当前页面的那个页面的URL，没有的话为null
+
+以上属性只有domain可以重置，但是不能随意设置，如p2p.wrox.com只能重置为wrow.com，而且不能逆向。当domain相同，框架间就可以通信
+
+##### 查找元素
+
+* getElementById()方法：接受一个参数即要取得元素的id（区分大小写），但是ie8及以下不区分大小写。而且ie7及以下有一个怪癖，即name特性与给定id匹配的表单元素，也会被返回。
+
+* getElementsByTagName()方法：接受一个参数，即要取得元素的标签名，返回的是包含0个或多个元素的NodeList。要想取得文档所有元素，可以传入"*"。
+  * item()方法可以访问nodelist中的项。当然，使用[]也可以访问
+  * namedItem()方法可以通过name特性取得nodeList集合中的项同样可以使用[]传入字符串访问name特性项
+* getElementsByName()方法：可以获取所有name特性的元素。
+
+##### 特殊集合
+
+* document.anchors:包含文档中所有带name特性的a元素
+* document.forms:包含文档中所有的form元素
+* document.images:包含文档中所有的img元素
+* document.link:包含文档中所有带href特性的a元素
+
+###### 文档写入
+
+* write():接受一个字符串参数，即要写入到输出流中的文本。
+* writeln():接受一个字符串参数，即将要写入到输出流中的文本，在字符串末尾添加一个换行符(\n)。
+* open()和close()可以用于打开和关闭网页的输出流
+
+#### Element类型
+
+* nodeType:1
+* nodeName:标签名
+* nodeValue:null
+* parentNode:Document或者Element
+* 子节点可能是Element,Text,Comment,ProcessingInstruction,CDATASection或EntityReference
+
+也可以使用tagName属性获取标签名，返回的可能是一个大写的标签名字符串
+
+##### HTML元素
+
+所有HTML元素都由HTMLElement类型表示，不是直接通过这个类型也是通过这个类型更具体的子类型来表示。HTMLElement直接继承自Element并添加了一些属性，每个HTML元素都包含以下特性：
+
+* id
+* title
+* lang
+* dir
+* className
+
+##### 操作特性
+
+* getAttribute():接受一个字符串参数即特性名，返回特性值（包括自定义特性），形式为字符串
+* setAttribute():接受两个参数，一个是特性名，二是特性值（IE7兼容性有问题，尽量使用属性来设置特性）
+* removeAttribute():接受一个参数即要删除的特性（IE8之前不支持）
+
+##### attributes特性
+
 ## ^_^未完待续，敬请期待！
