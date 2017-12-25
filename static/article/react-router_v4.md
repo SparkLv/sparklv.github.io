@@ -90,12 +90,12 @@ Hash history不支持location.key和location.state,只是用来支持旧版浏�
   * 跳转到指定路径
 * to:object
   * 携带参数跳转到指定路径
-  * ```html
-    <Link to={{
+  * ```
+     Link to={{
             pathname: '/course',
             search: '?sort=name',
             state: { price: 18 }
-    }} />
+    }}
     ```
 * replace:bool
   * 如果为true，点击链接后将使用新地址替换掉上次访问的地址。
