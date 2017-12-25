@@ -90,7 +90,7 @@ Hash history不支持location.key和location.state,只是用来支持旧版浏�
   * 跳转到指定路径
 * to:object
   * 携带参数跳转到指定路径
-  * ```javascript
+  * ```
     {pathname: '/course',search: '?sort=name',state: { price: 18 }}
     ```
 * replace:bool
