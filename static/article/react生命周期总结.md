@@ -12,7 +12,7 @@
 
 整体情况如下图所示
 
-![生命周期钩子](./img/react-lifecircle.png)
+![生命周期钩子](static/img/react-lifecircle.png)
 
 ### 实例化
 
